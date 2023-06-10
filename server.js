@@ -1,8 +1,15 @@
-const express = require('express')
-const app = express()
-const port = 5000
-const { User } = require('./models/User');
+var express = require('express')
+  , http = require('http')
+  , path = require('path');
+var bodyParser = require('body-parser')
+  , cookieParser = require('cookie-parser')
+  , static = require('serve-static')
+  , errorHandler = require('errorhandler');
+var expressErrorHandler = require('express-error-handler');
+var expressSession = require('express-session');
+var fs = require('fs');
 
+const { User } = require('./models/User');
 const mongoose = require('mongoose')
 mongoose
     .connect(
@@ -11,24 +18,53 @@ mongoose
     .then(()=> console.log('MongoDB connecting sucessful!'))
     .catch((err)=> console.log(err));
 
-app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+var app = express();
+app.set('port', process.env.PORT || 3000);
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json());
+app.use('/public', static(path.join(__dirname, 'public')));
+app.use(cookieParser());
+app.use(expressSession({
+	secret:'my key',
+	resave:true,
+	saveUninitialized:true
+}));
 
-app.post("/api/users/register", (req, res) => {
+var router = express.Router();
+
+app.post("/process/register", (req, res) => {
     const user = new User(req.body);
   
     user.save()
         .then(() => {
-            res.status(200).json({ success: true, user : user})
+            res.status(200).json({ success: true})
+        })
         .catch((err)=>{
             return res.json({ success: false, err })
         });
-    });
 });
-app.get('/', (req,res)=>{
-    res.send('Hello World!')
+
+app.post("/process/login", (req,res)=>{
+    User.find({ id: req.body.id, password:req.body.password })
+    .then((docs)=>{
+        if(docs){
+            req.session.userid = req.body.id;
+            return res.status(200).json({ id: req.body.id});
+        }else {
+            return res.json({
+                loginSuccess:false,
+                message:"아이디가 없습니다.",
+            });        
+        }
+    })
 })
 
-app.listen(port, () =>{
-    console.log(`Server is starting! ${port}`);
-})
+
+
+
+app.use('/', router);
+
+http.createServer(app).listen(app.get('port'), function(){
+    console.log('서버가 시작되었습니다. 포트 : ' + app.get('port'));     
+  });
+  

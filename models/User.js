@@ -2,21 +2,21 @@ const mongoose = require('mongoose');
 // const bcrypt = require('bcrypt');
 
 const userSchema = mongoose.Schema({
-  name: {
+  id: {
     type: String,
-    maxlength: 50,
-  },
-  email: {
-    type: String,
-    trim: true,
-    unique: 1,
+    maxlength: 20,
   },
   password: {
     type: String,
-    minlength: 5,
+    minlength: 2,
   },
   bookedLab: {
-    type: Number,
+    lab:{
+      type: Number
+    },
+    time:{
+      type: Number
+    }
   },
 });
 
@@ -37,6 +37,6 @@ const userSchema = mongoose.Schema({
 //     }
 // });
 
-const User = mongoose.model("User", userSchema);
+const User = mongoose.model("users", userSchema);
 
 module.exports = { User };
