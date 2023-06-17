@@ -45,22 +45,45 @@ app.post("/process/register", (req, res) => {
 });
 
 app.post("/process/login", (req,res)=>{
-    User.find({ id: req.body.id, password:req.body.password })
+    User.findOne({ id: req.body.id})
     .then((docs)=>{
-        if(docs){
+        console.log("로그인 요청 : " + docs)
+        if(!docs){
+            res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
+            res.write('<script>alert("아이디가 틀리거나 존재하지 않는 아이디입니다.")</script>');
+            res.end("<script>location.replace('/public/login.html')</script>");
+            return;
+        }
+        if(req.body.password != docs.password){
+            res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
+            res.write("<script>alert('비밀번호가 틀립니다.')</script>");
+            res.end("<script>location.replace('/public/login.html')</script>");
+            return;
+        }
+        if(req.body.password == docs.password){
             req.session.userid = req.body.id;
-            res.redirect('/public/success.html')
+            res.redirect('/public/index_login.html')
             console.log(req.session);
-        }else {
-            return res.json({
-                loginSuccess:false,
-                message:"아이디가 없습니다.",
-            });
         }
     })
 })
 
-
+app.get("/process/logOut", (req, res) =>{
+    console.log("로그아웃 요청 : " + req.session.userid)
+    req.session.destroy((err) => {
+        if(err){
+            res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
+            res.write("<script>alert('로그아웃 실패.')</script>");
+            res.end("<script>location.replace('/public/index_login.html')</script>");
+            console.log(err)
+            return
+        }
+    
+        res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
+        res.write("<script>alert('로그아웃합니다.')</script>");
+        res.end("<script>location.replace('/public/index.html')</script>");
+    })
+})
 
 
 
