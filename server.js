@@ -4,10 +4,7 @@ var express = require('express')
 var bodyParser = require('body-parser')
   , cookieParser = require('cookie-parser')
   , static = require('serve-static')
-  , errorHandler = require('errorhandler');
-var expressErrorHandler = require('express-error-handler');
 var expressSession = require('express-session');
-var fs = require('fs');
 
 const { User } = require('./models/User');
 const { Room } = require('./models/Room');
@@ -35,11 +32,13 @@ app.use(expressSession({
 var router = express.Router();
 
 app.post("/process/register", (req, res) => {
+    console.log("가입요청이 들어옴")
     const user = new User(req.body);
-  
     user.save()
         .then(() => {
-            res.status(200).json({ success: true})
+            res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
+            res.write('<script>alert("가입성공! 로그인페이지로 이동합니다.")</script>');
+            res.end("<script>location.replace('/public/login.html')</script>");
         })
         .catch((err)=>{
             return res.json({ success: false, err })
@@ -139,8 +138,20 @@ app.post("/process/searchRoom", (req, res) =>{
 app.get('/current', function(req, res){
     res.render('current.ejs', { rooms: null});
 })
+
+app.get('/mypage', function(req, res){
+    Room.find({userId : req.session.userid})
+    .then((docs)=>{
+        console.log(docs)
+        res.render('mypage.ejs', { rooms: docs});
+    })
+})
+
 app.get('/register', function(req, res){
-    res.render('register.ejs', { rooms: null});
+    User.find()
+    .then((info) =>{
+        res.render('register.ejs', { user: info});
+    })
 })
 
 app.use('/', router);

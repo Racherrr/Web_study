@@ -8,18 +8,11 @@
 	<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet"> <!-- https://fonts.google.com/ -->
     <link href="../public/css/bootstrap.min.css" rel="stylesheet">
     <link href="../public/css/templatemo-xtra-blog.css" rel="stylesheet">
-<!--
-    
-TemplateMo 553 Xtra Blog
-
-https://templatemo.com/tm-553-xtra-blog
-
--->
-<script>
-    function NeedLogin(){
-        alert("로그인이 필요한 서비스입니다.")
-        location.replace("/public/login.html")
-    }
+    <script>
+        function NeedLogin(){
+            alert("로그인이 필요한 서비스입니다.")
+            location.replace("/public/login.html")
+        }
 </script>
 </head>
 <body>
@@ -53,7 +46,8 @@ https://templatemo.com/tm-553-xtra-blog
                         시간표
                     </a></li>
                 </ul>
-            </nav>            <div class="tm-mb-65">
+            </nav>
+            <div class="tm-mb-65">
                 <a rel="nofollow" href="https://fb.com/templatemo" class="tm-social-link">
                     <i class="fab fa-facebook tm-social-icon"></i>
                 </a>
@@ -84,24 +78,18 @@ https://templatemo.com/tm-553-xtra-blog
                     <hr class="tm-hr-primary tm-mb-55">
                 </div>
             </div>
-            <form method="post" action="/process/login">
+                <label for="id" class="form-label">ID
+                  <!-- <button class="btn btn-outline-success" style="scale: 70%; font-size: 130%;">중복체크</button> -->
+                </label>
+                <form method="post" action="/process/register">
                 <div class="mb-3">
-                  <label for="id" class="form-label">ID<button class="tm-btn tm-btn-primary" style="scale: 70%; font-size: 130%;">중복체크</button>                        
-                  </label>
-                  <input type="text" class="form-control" id="id" name="id" aria-describedby="emailHelp">
+                  <input type="text" class="form-control" id="id" name="id">
                 </div>
-
-
-
-
-
-
-
                 <div class="mb-3">
                   <label for="password" class="form-label">Password</label>
                   <input type="password" class="form-control" id="password" name="password">
                 </div>
-                <button class="tm-btn tm-btn-primary tm-btn-small">Log In</button>                        
+                <button class="tm-btn tm-btn-primary tm-btn-small">Register</button>                        
             </form>
 
 
