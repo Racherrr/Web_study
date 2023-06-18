@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Classer</title>
+	<link rel="stylesheet" href="../public/fontawesome/css/all.min.css"> <!-- https://fontawesome.com/ -->
+	<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet"> <!-- https://fonts.google.com/ -->
+    <link href="../public/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../public/css/templatemo-xtra-blog.css" rel="stylesheet">
+<!--
+    
+TemplateMo 553 Xtra Blog
+
+https://templatemo.com/tm-553-xtra-blog
+
+-->
+<script>
+    function NeedLogin(){
+        alert("로그인이 필요한 서비스입니다.")
+        location.replace("/public/login.html")
+    }
+</script>
+</head>
+<body>
+	<header class="tm-header" id="tm-header">
+        <div class="tm-header-wrapper">
+            <button class="navbar-toggler" type="button" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="tm-site-header">
+                <h1 style="padding-left: 30px;">Classer</h1>
+                <h3 class="tm-nav-item"><a href="login.html" class="tm-nav-link">
+                    <i class="fas fa-linkedin"></i>
+                    Log In
+                </a></h3>
+            </div>            <nav class="tm-nav" id="tm-nav">            
+                <ul>
+                    <li class="tm-nav-item"><a href="index.html" class="tm-nav-link">
+                        <i class="fas fa-home"></i>
+                        Home
+                    </a></li>
+                    <li class="tm-nav-item"><button onclick="NeedLogin()" class="tm-nav-link" style="border: none;">
+                        <i class="fas fa-pen"></i>
+                        강의실 예약
+                    </a></li>
+                    <li class="tm-nav-item"><button onclick="NeedLogin()" class="tm-nav-link" style="border: none;">
+                        <i class="fas fa-users"></i>
+                        강의실 현황
+                    </a></li>
+                    <li class="tm-nav-item"><button onclick="NeedLogin()" class="tm-nav-link" style="border: none;">
+                        <i class="far fa-comments"></i>
+                        시간표
+                    </a></li>
+                </ul>
+            </nav>            <div class="tm-mb-65">
+                <a rel="nofollow" href="https://fb.com/templatemo" class="tm-social-link">
+                    <i class="fab fa-facebook tm-social-icon"></i>
+                </a>
+                <a href="https://twitter.com" class="tm-social-link">
+                    <i class="fab fa-twitter tm-social-icon"></i>
+                </a>
+                <a href="https://instagram.com" class="tm-social-link">
+                    <i class="fab fa-instagram tm-social-icon"></i>
+                </a>
+                <a href="https://linkedin.com" class="tm-social-link">
+                    <i class="fab fa-linkedin tm-social-icon"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+    <div class="container-fluid">
+        <main class="tm-main">
+            <!-- Search form -->
+            <div class="row tm-row">
+                <div class="col-12">
+                    <h2 class="tm-pt-60 tm-color-primary tm-post-title" style="font-size: 230%; margin-bottom: 3%;">
+                        Register
+                    </h2>
+                </div>
+            </div>
+            <div class="row tm-row">
+                <div class="col-12">
+                    <hr class="tm-hr-primary tm-mb-55">
+                </div>
+            </div>
+            <form method="post" action="/process/login">
+                <div class="mb-3">
+                  <label for="id" class="form-label">ID<button class="tm-btn tm-btn-primary" style="scale: 70%; font-size: 130%;">중복체크</button>                        
+                  </label>
+                  <input type="text" class="form-control" id="id" name="id" aria-describedby="emailHelp">
+                </div>
+
+
+
+
+
+
+
+                <div class="mb-3">
+                  <label for="password" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="password" name="password">
+                </div>
+                <button class="tm-btn tm-btn-primary tm-btn-small">Log In</button>                        
+            </form>
+
+
+
+            <hr>
+            <footer class="row tm-row">
+                <div class="col-md-6 col-12 tm-color-gray">
+                    Design: <a rel="nofollow" target="_parent" href="https://templatemo.com" class="tm-external-link">TemplateMo</a>
+                </div>
+                <div class="col-md-6 col-12 tm-color-gray tm-copyright">
+                    Copyright 2020 Xtra Blog Company Co. Ltd.
+                </div>
+            </footer>
+        </main>
+    </div>
+    <script src="../public/js/jquery.min.js"></script>
+    <script src="../public/js/templatemo-script.js"></script>
+</body>
+</html>

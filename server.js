@@ -10,6 +10,7 @@ var expressSession = require('express-session');
 var fs = require('fs');
 
 const { User } = require('./models/User');
+const { Room } = require('./models/Room');
 const mongoose = require('mongoose')
 mongoose
     .connect(
@@ -22,6 +23,7 @@ var app = express();
 app.set('port', process.env.PORT || 3000);
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
+app.set('view engine', 'ejs')
 app.use('/public', static(path.join(__dirname, 'public')));
 app.use(cookieParser());
 app.use(expressSession({
@@ -85,9 +87,61 @@ app.get("/process/logOut", (req, res) =>{
     })
 })
 
+app.post("/process/reserve", (req, res) =>{
+    if(!req.session.userid){
+        console.log("세션만료");
+        res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
+        res.write("<script>alert('로그인이 필요한 서비스입니다. 로그인창으로 이동됩니다.')</script>");
+        res.end("<script>location.replace('/public/login.html')</script>");
+        return;
+    }
 
+    console.log("강의실 예약 요청이 들어옴. 유저 : " + req.session.userid)
+    Room.find({ room: req.body.room || req.query.room })
+    .then((docs)=>{
+        var dup = false;
+        for(var i = 0; i < docs.length; i++){
+            if(docs[i].startTime == req.body.startTime){
+                dup = true;
+                break;
+            }
+        }
+        if(dup){
+            res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
+            res.write("<script>alert('이미 예약된 시간입니다.')</script>");
+            res.end("<script>location.replace('/public/reserve.html')</script>");
+        } else {
+            var room = new Room({
+                room : req.body.room,
+                startTime: req.body.startTime,
+                endTime: req.body.endTime,
+                userId: req.session.userid,
+            });
+            room.save()
+                .then((newFile) => {
+                    res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
+                    res.write("<script>alert('예약성공!')</script>");
+                    res.end("<script>location.replace('/public/reserve.html')</script>");
+                });
+        }
+    })
+})
 
+app.post("/process/searchRoom", (req, res) =>{
+    Room.find({room : req.body.room})
+    .then((result)=>{
+        ans = result.sort((a, b) => a.startTime - b.startTime);
+        res.render('current.ejs', { rooms: ans });
+    });
 
+})
+
+app.get('/current', function(req, res){
+    res.render('current.ejs', { rooms: null});
+})
+app.get('/register', function(req, res){
+    res.render('register.ejs', { rooms: null});
+})
 
 app.use('/', router);
 

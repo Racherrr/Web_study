@@ -9,16 +9,9 @@ const userSchema = mongoose.Schema({
   password: {
     type: String,
     minlength: 2,
-  },
-  bookedLab: {
-    lab:{
-      type: Number
-    },
-    time:{
-      type: Number
-    }
-  },
+  }
 });
+
 
 // userSchema.pre('save', (next)=>{
 //     var user = this;
