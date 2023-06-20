@@ -1,47 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Classer</title>
-	<link rel="stylesheet" href="../public/fontawesome/css/all.min.css"> <!-- https://fontawesome.com/ -->
-	<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet"> <!-- https://fonts.google.com/ -->
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Classer</title>
+   <link rel="stylesheet" href="../public/fontawesome/css/all.min.css"> <!-- https://fontawesome.com/ -->
+   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet"> <!-- https://fonts.google.com/ -->
     <link href="../public/css/bootstrap.min.css" rel="stylesheet">
     <link href="../public/css/templatemo-xtra-blog.css" rel="stylesheet">
-    <script>
-        function NeedLogin(){
-            alert("로그인이 필요한 서비스입니다.")
-            location.replace("/public/login.html")
-        }
-</script>
+<!--
+    
+TemplateMo 553 Xtra Blog
+
+https://templatemo.com/tm-553-xtra-blog
+
+-->
 </head>
 <body>
-	<header class="tm-header" id="tm-header">
+   <header class="tm-header" id="tm-header">
         <div class="tm-header-wrapper">
             <button class="navbar-toggler" type="button" aria-label="Toggle navigation">
                 <i class="fas fa-bars"></i>
             </button>
             <div class="tm-site-header">
                 <h1 style="padding-left: 30px;">Classer</h1>
-                <h3 class="tm-nav-item"><a href="/public/login.html" class="tm-nav-link">
-                    <i class="fas fa-linkedin"></i>
-                    Log In
+                <h3 class="tm-nav-item active">
+                    <form method="get" action="/process/logOut">
+                        <button class="tm-nav-link" style="border: none;">
+                        <i class="fas fa-linkedin"></i>
+                        Log Out
+                    </form>
                 </a></h3>
-            </div>            <nav class="tm-nav" id="tm-nav">            
+            </div>
+            <nav class="tm-nav" id="tm-nav">            
                 <ul>
-                    <li class="tm-nav-item"><a href="/index" class="tm-nav-link">
+                    <li class="tm-nav-item active"><a href="/index" class="tm-nav-link">
                         <i class="fas fa-home"></i>
                         Home
                     </a></li>
-                    <li class="tm-nav-item"><button onclick="NeedLogin()" class="tm-nav-link" style="border: none;">
+                    <li class="tm-nav-item"><a href="../public/reserve.html" class="tm-nav-link">
                         <i class="fas fa-pen"></i>
                         강의실 예약
                     </a></li>
-                    <li class="tm-nav-item"><button onclick="NeedLogin()" class="tm-nav-link" style="border: none;">
+                    <li class="tm-nav-item"><a href="/current" class="tm-nav-link">
                         <i class="fas fa-users"></i>
                         강의실 현황
                     </a></li>
-                    <li class="tm-nav-item"><button onclick="NeedLogin()" class="tm-nav-link" style="border: none;">
+                    <li class="tm-nav-item"><a href="../public/contact.html" class="tm-nav-link">
                         <i class="far fa-comments"></i>
                         시간표
                     </a></li>
@@ -69,7 +74,7 @@
             <div class="row tm-row">
                 <div class="col-12">
                     <h2 class="tm-pt-60 tm-color-primary tm-post-title" style="font-size: 230%; margin-bottom: 3%;">
-                        Register
+                        Admin
                     </h2>
                 </div>
             </div>
@@ -78,24 +83,24 @@
                     <hr class="tm-hr-primary tm-mb-55">
                 </div>
             </div>
-                <label for="id" class="form-label">ID
-                  <!-- <button class="btn btn-outline-success" style="scale: 70%; font-size: 130%;">중복체크</button> -->
-                </label>
-                <form method="post" action="/process/register">
-                <div class="mb-3">
-                  <input type="text" class="form-control" id="id" name="_id">
+            <div class="px-5 mb-4 rounded-3">
+                <div class="container-fluid">
+                  <h4 class="mb-5 display-5 fw-bold"> <span class="tm-color-primary tm-post-title" style="font-size: 130%; color: black;">
+                    관리자 전용 페이지 입니다.
+                  </span></h4>
+                  <h5>전체 유저 수 : <%= users -1%></h5>
+                  <h5>전체 예약 수 : <%= rooms%></h5>
+
+
+                  <div class="py-5">
+                    <a href="/userManage"><button class="btn btn-outline-info btn-lg" type="button">회원 관리</button></a>
+                    <a href="/roomManage"><button class="btn btn-outline-info btn-lg" type="button">강의실 관리</button></a>
+                  </div>
                 </div>
-                <div class="mb-3">
-                  <label for="password" class="form-label">Password</label>
-                  <input type="password" class="form-control" id="password" name="password">
-                </div>
-                <button class="tm-btn tm-btn-primary tm-btn-small">Register</button>                        
-            </form>
+              </div>
 
-
-
-            <hr>
             <footer class="row tm-row">
+                <hr class="col-12">
                 <div class="col-md-6 col-12 tm-color-gray">
                     Design: <a rel="nofollow" target="_parent" href="https://templatemo.com" class="tm-external-link">TemplateMo</a>
                 </div>

@@ -46,7 +46,7 @@ app.post("/process/register", (req, res) => {
 });
 
 app.post("/process/login", (req,res)=>{
-    User.findOne({ id: req.body.id})
+    User.findOne({ _id: req.body.id})
     .then((docs)=>{
         console.log("로그인 요청 : " + docs)
         if(!docs){
@@ -63,7 +63,7 @@ app.post("/process/login", (req,res)=>{
         }
         if(req.body.password == docs.password){
             req.session.userid = req.body.id;
-            res.redirect('/public/index_login.html')
+            res.redirect('/index')
             console.log(req.session);
         }
     })
@@ -96,11 +96,11 @@ app.post("/process/changePwd", (req, res) =>{
         return;
     }
 
-    User.findOne({id : req.session.userid})
+    User.findOne({_id : req.session.userid})
     .then((user) => {
         console.log("비밀번호 변경 요청 : " + user.id)
         if(user.password == req.body.nowPassword){
-            User.updateOne({ id : req.session.userid }, { password : req.body.newPassword})
+            User.updateOne({ _id : req.session.userid }, { password : req.body.newPassword})
             .then(()=>{
                 res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
                 res.write("<script>alert('성공적으로 변경되었습니다.')</script>");
@@ -171,18 +171,58 @@ app.post("/process/delete", (req, res)=>{
     console.log(req.body.roomName)
     Room.deleteOne({_id:req.body.roomName})
     .then(()=>{
-        res.redirect('/myPage');
+        if(req.session.userid == 'admin'){
+            res.redirect('/roomManage');
+        }else{
+            res.redirect('/userManage');
+        }})
+})
+
+app.post("/process/userDelete", (req, res)=>{
+    console.log(req.body.UserName)
+    Room.deleteMany({ userId:req.body.UserName})
+    .then(()=>{
+        User.deleteOne({_id:req.body.UserName})
+        .then(()=>{
+            res.redirect('/userManage');
+        })
     })
 })
 
 
+app.get('/index', function(req, res){
+    if(req.session.userid){
+        if(req.session.userid == 'admin'){
+            User.count().then((userNum) =>{
+                Room.count().then((roomNum)=>{
+                    res.render('admin_index.ejs', { users : userNum, rooms : roomNum})
+                })
+            })
+        } else{
+            res.redirect('/public/index_login.html');
+        }
+    } else{
+        res.redirect('/public/index.html')
+    }
+})
+
 app.get('/current', function(req, res){
     res.render('current.ejs', { rooms: null});
 })
+app.get('/userManage', function(req, res){
+    User.find({ _id : { $ne: 'admin'}})
+    .then(docs=>{        
+        res.render('userManage.ejs', {user: docs});
+    })
+})
+app.get('/roomManage', function(req, res){
+    Room.find()
+    .then(docs=>{
+        res.render('roomManage.ejs', {rooms: docs});
+    })
+})
 
 app.get('/mypage', function(req, res){
-//        res.render('mypage.ejs');
-
     Room.find({userId : req.session.userid})
     .then((docs)=>{
         console.log(docs)
@@ -196,6 +236,7 @@ app.get('/register', function(req, res){
         res.render('register.ejs', { user: info});
     })
 })
+
 
 app.use('/', router);
 

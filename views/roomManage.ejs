@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Classer</title>
-	<link rel="stylesheet" href="../public/fontawesome/css/all.min.css"> <!-- https://fontawesome.com/ -->
-	<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet"> <!-- https://fonts.google.com/ -->
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Classer</title>
+   <link rel="stylesheet" href="../public/fontawesome/css/all.min.css"> <!-- https://fontawesome.com/ -->
+   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet"> <!-- https://fonts.google.com/ -->
     <link href="../public/css/bootstrap.min.css" rel="stylesheet">
     <link href="../public/css/templatemo-xtra-blog.css" rel="stylesheet">
+<!--
+    
+TemplateMo 553 Xtra Blog
 
-    <link href="../public/css/offcanvas.css" rel="stylesheet">
+https://templatemo.com/tm-553-xtra-blog
 
+-->
 </head>
 <body>
 	<header class="tm-header" id="tm-header">
@@ -22,12 +26,12 @@
                 <h1 style="padding-left: 30px;">Classer</h1>
                 <h3 class="tm-nav-item active">
                     <form method="get" action="/process/logOut">
-                      <button class="tm-nav-link" type="submit" style="border: none;">
-                      <i class="fas fa-linkedin"></i>
-                      Log Out
-                      </a>
+                        <button class="tm-nav-link" style="border: none;">
+                        <i class="fas fa-linkedin"></i>
+                        Log Out
+                        </a>
                     </form>
-                  </h3>
+                </h3>
             </div>
             <nav class="tm-nav" id="tm-nav">            
                 <ul>
@@ -67,104 +71,48 @@
     </header>
     <div class="container-fluid">
         <main class="tm-main">
-            <!-- Search form -->
             <div class="row tm-row">
                 <div class="col-12">
                     <h2 class="tm-pt-60 tm-color-primary tm-post-title" style="font-size: 230%; margin-bottom: 3%;">
-                        My Page
+                       강의실 전체 현황
                     </h2>
                 </div>
             </div>
-            
-            <div class="row">
+            <div class="row tm-row">
                 <div class="col-12">
-                    <hr class="tm-hr-primary ">
+                    <hr class="tm-hr-primary tm-mb-55">
                 </div>
             </div>
 
-            <div class="row py-5 px-4">
-            <div class="bg-white shadow rounded overflow-hidden">
-              <div class="px-4 pt-0 pb-4 bg-info">
-                  <div class="media align-items-end profile-header">
-                      <div class="media-body mb-5 text-white">
-                        <div class="row py-3 px-3">
-                        <h2 class="mt-0 mb-0"><%= user %><h5 class="mt-2">님의 개인페이지</h5></h2>
-                      </div>
-                      <p class="small mb-4 text-white"> 
-                      <i class="fa fa-map-marker mr-2"></i>Donga Univ</p>
-                      </div>
-                  </div>
-              </div>
-  
-              <div class="px-4 pt-4">
-                  <h5 class="">비밀번호 변경</h5>
-            </div>
-
-              <div class="bg-light px-4 d-flex text-center">
-                
-                <form method="post" action="/process/changePwd">
-                  <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="inputGroup-sizing-default">현재 비밀번호</span>
-                    </div>
-                    <input type="password" name="nowPassword" class="form-control" aria-label="Default" style="margin-right: 16px;" aria-describedby="inputGroup-sizing-default">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="inputGroup-sizing-default">새로운 비밀번호</span>
-                    </div>
-                    <input type="password" name="newPassword" class="form-control" aria-label="Default" style="margin-right: 16px;" aria-describedby="inputGroup-sizing-default">
-                    <button class="btn btn-outline-success" type="submit">변경</button>
-                  </div>
-                </form>
-        </div>
-        <div class="py-5">
-          <div class="py-4 px-4">
-              <div class="d-flex align-items-center justify-content-between mb-3">
-                  <h5 class="mb-0">내가 신청한 강의실</h5>
-              </div>
-              <table class="table">
+            <table class="table">
                 <thead>
                   <tr>
                     <th scope="col"></th>
                     <th scope="col">강의실</th>
                     <th scope="col">시작시간</th>
                     <th scope="col">종료시간</th>
-                    <th scope="col">비고</th>
-                  </tr>
+                    <th scope="col">사용자</th>
+                </tr>
                 </thead>
-                <% if(rooms != null){ %>
                 <tbody>
+                <% if(rooms != null){ %>
                     <% for(var i = 0; i < rooms.length; i++){ %>
                     <tr>
                         <th scope="row"><%= i+1 %></th>
                         <td><%= rooms[i].room %></td>
                         <td><%= rooms[i].startTime %></td>
                         <td><%= rooms[i].endTime %></td>
+                        <td><%= rooms[i].userId %></td>
                         <td>
-                          <form method="post" action="/process/delete">
-                            <button type="submit" class="btn btn-outline-danger" name="roomName" value='<%= rooms[i]._id %>'>삭제</button>
-                          </form>
-                        </td>
-                      </tr>
+                            <form method="post" action="/process/delete">
+                              <button type="submit" class="btn btn-outline-danger" name="roomName" value='<%= rooms[i]._id %>'>삭제</button>
+                            </form>
+                          </td>
+                        </tr>
                     <% } %>
+                <% } %>
                 </tbody>
                 </table>
-                <% } %>
-
-                <form method="post" action="/process/deleteUser">
-                  <div class="pt-5">
-                    <div class="pt-5">
-                      <button class="btn btn-outline-danger" type="submit">회원탈퇴</button>
-                    </div>                    
-                  </div>
-                </form>
-          </div>
-        </div>
-          </div><!-- End profile widget -->
-        <!-- </div> -->
-      </div>
-
-
-
 
             <footer class="row tm-row">
                 <div class="col-md-6 col-12 tm-color-gray">
