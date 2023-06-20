@@ -21,11 +21,13 @@
             <div class="tm-site-header">
                 <h1 style="padding-left: 30px;">Classer</h1>
                 <h3 class="tm-nav-item active">
-                    <form method="get" action="/process/logOut"></form>
-                    <button class="tm-nav-link" style="border: none;">
-                    <i class="fas fa-linkedin"></i>
-                    Log Out
-                </a></h3>
+                    <form method="get" action="/process/logOut">
+                      <button class="tm-nav-link" type="submit" style="border: none;">
+                      <i class="fas fa-linkedin"></i>
+                      Log Out
+                      </a>
+                    </form>
+                  </h3>
             </div>
             <nav class="tm-nav" id="tm-nav">            
                 <ul>
@@ -74,136 +76,95 @@
                 </div>
             </div>
             
-            <div class="row tm-row">
+            <div class="row">
                 <div class="col-12">
                     <hr class="tm-hr-primary ">
                 </div>
             </div>
-              <main role="main" class="container">
-                <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-purple rounded box-shadow">
-                  <img class="mr-3" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-outline.svg" alt="" width="48" height="48">
-                  <div class="lh-100">
-                    <h6 class="mb-0 text-white lh-100">회원정보</h6>
-                  </div>
-                </div>
-          
-                <div class="my-3 p-3 bg-white rounded box-shadow">
-                  <h6 class="border-bottom border-gray pb-2 mb-0">Recent updates</h6>
-                  <div class="media text-muted pt-3">
-                    <img data-src="holder.js/32x32?theme=thumb&bg=007bff&fg=007bff&size=1" alt="" class="mr-2 rounded">
-                    <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                      <strong class="d-block text-gray-dark">@username</strong>
-                      Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-                    </p>
-                  </div>
-                  <div class="media text-muted pt-3">
-                    <img data-src="holder.js/32x32?theme=thumb&bg=e83e8c&fg=e83e8c&size=1" alt="" class="mr-2 rounded">
-                    <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                      <strong class="d-block text-gray-dark">@username</strong>
-                      Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-                    </p>
-                  </div>
-                  <div class="media text-muted pt-3">
-                    <img data-src="holder.js/32x32?theme=thumb&bg=6f42c1&fg=6f42c1&size=1" alt="" class="mr-2 rounded">
-                    <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                      <strong class="d-block text-gray-dark">@username</strong>
-                      Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-                    </p>
-                  </div>
-                  <small class="d-block text-right mt-3">
-                    <a href="#">All updates</a>
-                  </small>
-                </div>
-          
-                <div class="my-3 p-3 bg-white rounded box-shadow">
-                  <h6 class="border-bottom border-gray pb-2 mb-0">Suggestions</h6>
-                  <div class="media text-muted pt-3">
-                    <img data-src="holder.js/32x32?theme=thumb&bg=007bff&fg=007bff&size=1" alt="" class="mr-2 rounded">
-                    <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                      <div class="d-flex justify-content-between align-items-center w-100">
-                        <strong class="text-gray-dark">Full Name</strong>
-                        <a href="#">Follow</a>
+
+            <div class="row py-5 px-4">
+            <div class="bg-white shadow rounded overflow-hidden">
+              <div class="px-4 pt-0 pb-4 bg-info">
+                  <div class="media align-items-end profile-header">
+                      <div class="media-body mb-5 text-white">
+                        <div class="row py-3 px-3">
+                        <h2 class="mt-0 mb-0"><%= user %><h5 class="mt-2">님의 개인페이지</h5></h2>
                       </div>
-                      <span class="d-block">@username</span>
-                    </div>
-                  </div>
-                  <div class="media text-muted pt-3">
-                    <img data-src="holder.js/32x32?theme=thumb&bg=007bff&fg=007bff&size=1" alt="" class="mr-2 rounded">
-                    <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                      <div class="d-flex justify-content-between align-items-center w-100">
-                        <strong class="text-gray-dark">Full Name</strong>
-                        <a href="#">Follow</a>
+                      <p class="small mb-4 text-white"> 
+                      <i class="fa fa-map-marker mr-2"></i>Donga Univ</p>
                       </div>
-                      <span class="d-block">@username</span>
-                    </div>
                   </div>
-                  <div class="media text-muted pt-3">
-                    <img data-src="holder.js/32x32?theme=thumb&bg=007bff&fg=007bff&size=1" alt="" class="mr-2 rounded">
-                    <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                      <div class="d-flex justify-content-between align-items-center w-100">
-                        <strong class="text-gray-dark">Full Name</strong>
-                        <a href="#">Follow</a>
-                      </div>
-                      <span class="d-block">@username</span>
+              </div>
+  
+              <div class="px-4 pt-4">
+                  <h5 class="">비밀번호 변경</h5>
+            </div>
+
+              <div class="bg-light px-4 d-flex text-center">
+                
+                <form method="post" action="/process/changePwd">
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputGroup-sizing-default">현재 비밀번호</span>
                     </div>
+                    <input type="password" name="nowPassword" class="form-control" aria-label="Default" style="margin-right: 16px;" aria-describedby="inputGroup-sizing-default">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputGroup-sizing-default">새로운 비밀번호</span>
+                    </div>
+                    <input type="password" name="newPassword" class="form-control" aria-label="Default" style="margin-right: 16px;" aria-describedby="inputGroup-sizing-default">
+                    <button class="btn btn-outline-success" type="submit">변경</button>
                   </div>
-                  <small class="d-block text-right mt-3">
-                    <a href="#">All suggestions</a>
-                  </small>
-                </div>
-              </main>
+                </form>
+        </div>
+        <div class="py-5">
+          <div class="py-4 px-4">
+              <div class="d-flex align-items-center justify-content-between mb-3">
+                  <h5 class="mb-0">내가 신청한 강의실</h5>
+              </div>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col">강의실</th>
+                    <th scope="col">시작시간</th>
+                    <th scope="col">종료시간</th>
+                    <th scope="col">비고</th>
+                  </tr>
+                </thead>
+                <% if(rooms != null){ %>
+                <tbody>
+                    <% for(var i = 0; i < rooms.length; i++){ %>
+                    <tr>
+                        <th scope="row"><%= i+1 %></th>
+                        <td><%= rooms[i].room %></td>
+                        <td><%= rooms[i].startTime %></td>
+                        <td><%= rooms[i].endTime %></td>
+                        <td>
+                          <form method="post" action="/process/delete">
+                            <button type="submit" class="btn btn-outline-danger" name="roomName" value='<%= rooms[i]._id %>'>삭제</button>
+                          </form>
+                        </td>
+                      </tr>
+                    <% } %>
+                </tbody>
+                </table>
+                <% } %>
+
+                <form method="post" action="/process/deleteUser">
+                  <div class="pt-5">
+                    <div class="pt-5">
+                      <button class="btn btn-outline-danger" type="submit">회원탈퇴</button>
+                    </div>                    
+                  </div>
+                </form>
+          </div>
+        </div>
+          </div><!-- End profile widget -->
+        <!-- </div> -->
+      </div>
 
 
-            <!-- 
-            <div class="row tm-row">
-                <div class="col-lg-8 tm-post-col">
-                    <div class="tm-post-full">                    
-                        <div class="mb-4">
-                            강의실을 선택해 조회합니다.
-                            <form method="post" action="/process/searchRoom">
-                                <select class="form-select" name="room" style="scale: 110%;">
-                                    <option selected>강의실 선택</option>
-                                    <option value="601">601호</option>
-                                    <option value="602">602호</option>
-                                    <option value="603">603호</option>
-                                </select>
-                                <button class="tm-btn tm-btn-primary tm-btn-small" style="scale: 80%;">찾기</button>
-                            </form>
-                            <br>
-                            <br>
-                            <br>
 
-                            <% if(rooms != null){ %>
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                          <th scope="col"></th>
-                                          <th scope="col">강의실</th>
-                                          <th scope="col">시작시간</th>
-                                          <th scope="col">종료시간</th>
-                                          <th scope="col">사용자</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <% for(var i = 0; i < rooms.length; i++){ %>
-                                        <tr>
-                                            <th scope="row"><%= i+1 %></th>
-                                            <td>강의실 : <%= rooms[i].room %></td>
-                                            <td>시작시간 : <%= rooms[i].startTime %></td>
-                                            <td>종료시간 : <%= rooms[i].endTime %></td>
-                                            <td>사용자 : <%= rooms[i].userId %></td>
-                                        </tr>
-                                        <% } %>
-                                    </tbody>
-                                </table>
-                            <% } %>
-                            <br>
-                            <br>
-
-                        </div>
-                    </div>
-                </div>
-            </div> -->
 
             <footer class="row tm-row">
                 <div class="col-md-6 col-12 tm-color-gray">

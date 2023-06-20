@@ -86,6 +86,38 @@ app.get("/process/logOut", (req, res) =>{
     })
 })
 
+
+app.post("/process/changePwd", (req, res) =>{
+    if(!req.session.userid){
+        console.log("세션만료");
+        res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
+        res.write("<script>alert('로그인이 필요한 서비스입니다. 로그인창으로 이동됩니다.')</script>");
+        res.end("<script>location.replace('/public/login.html')</script>");
+        return;
+    }
+
+    User.findOne({id : req.session.userid})
+    .then((user) => {
+        console.log("비밀번호 변경 요청 : " + user.id)
+        if(user.password == req.body.nowPassword){
+            User.updateOne({ id : req.session.userid }, { password : req.body.newPassword})
+            .then(()=>{
+                res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
+                res.write("<script>alert('성공적으로 변경되었습니다.')</script>");
+                res.end("<script>location.replace('/myPage')</script>");                        
+            })
+        } else {
+            res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
+            res.write("<script>alert('비밀번호가 틀립니다..')</script>");
+            res.end("<script>location.replace('/myPage')</script>");        
+        }
+    })
+
+})
+
+
+
+
 app.post("/process/reserve", (req, res) =>{
     if(!req.session.userid){
         console.log("세션만료");
@@ -135,15 +167,26 @@ app.post("/process/searchRoom", (req, res) =>{
 
 })
 
+app.post("/process/delete", (req, res)=>{
+    console.log(req.body.roomName)
+    Room.deleteOne({_id:req.body.roomName})
+    .then(()=>{
+        res.redirect('/myPage');
+    })
+})
+
+
 app.get('/current', function(req, res){
     res.render('current.ejs', { rooms: null});
 })
 
 app.get('/mypage', function(req, res){
+//        res.render('mypage.ejs');
+
     Room.find({userId : req.session.userid})
     .then((docs)=>{
         console.log(docs)
-        res.render('mypage.ejs', { rooms: docs});
+        res.render('mypage.ejs', { user: req.session.userid ,rooms: docs});
     })
 })
 

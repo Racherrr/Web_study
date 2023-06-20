@@ -1,0 +1,17 @@
+{
+  "folders": [
+	{
+		"path": "../beharbor_createEnv"
+	},
+	{
+		"path": "../DAU-CG23-LAB"
+	}
+],
+  "settings": {
+    "files.associations": {
+      "new": "cpp",
+      "*.tcc": "cpp"
+    },
+    "liveServer.settings.multiRootWorkspaceName": "BackEnd"
+  }
+}
